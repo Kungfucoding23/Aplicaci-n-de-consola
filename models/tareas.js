@@ -56,7 +56,7 @@ class Tareas {
                 //mostrar completadas
                 if (completadoEn){
                     cont += 1;
-                    console.log(`${(cont + '.').green} ${desc} ${'::'.green} ${completadoEn}`);
+                    console.log(`${(cont + '.').green} ${desc} ${'::'.green} ${completadoEn.green}`);
                 }
             }else {
                 //mostrar pendientes 
@@ -67,6 +67,24 @@ class Tareas {
             }
         })
     }    
+
+    toggleCompletadas(ids = []){
+        //si viene un id lo tengo que marcar como completado
+        ids.forEach(id => {
+            const tarea = this._listado[id];
+            if(!tarea.completadoEn){
+                tarea.completadoEn = new Date().toISOString();
+            }
+        });
+
+        this.listadoArr.forEach(tarea => {
+            if (!ids.includes(tarea.id)){ //si mi arreglo de ids incluye la tarea registrada
+                this._listado[tarea.id].completadoEn = null;
+            }
+        })
+
+    }
+
 }
 
 
